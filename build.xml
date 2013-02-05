@@ -1262,7 +1262,25 @@
             <echo>Sass (scss): generated @{output}</echo>
         </sequential>
     </macrodef>
+    <target name="setup-dependencies">
+      <path id="jruby.classpath">  
+         <fileset file="./${dir.build.tools}/jruby-complete-1.6.7.2.jar"/>
+      </path>  
+    </target>
+     
+    <target name="compile.sass" depends="setup-dependencies">  
+         <java classname="org.jruby.Main" fork="true" failonerror="true" classpathref="jruby.classpath">  
+             <arg line="./${dir.build.tools}/compass/compile.rb ./${dir.build.tools}/compass/gems compile ./${dir.build.tools}/compass"/>  
+         </java>  
+     </target>  
+       
+     
 
+    <target name="watch.sass" depends="setup-dependencies">  
+         <java classname="org.jruby.Main" fork="true" failonerror="true" classpathref="jruby.classpath">  
+             <arg line="./${dir.build.tools}/compass/compile.rb ./${dir.build.tools}/compass/gems watch ./${dir.build.tools}/compass"/>  
+         </java>  
+     </target>   
     <target name="-needhtmlrefresh">
         <echo message="Checking whether the HTML needs to be refreshed"/>
         <!-- Changes to style.css or scripts.js mean that the html must be updated, and it will be.
