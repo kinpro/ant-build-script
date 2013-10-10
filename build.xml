@@ -1138,6 +1138,9 @@
           <then>
             <var name="advpng.available" value="false"/>
           </then>
+          <else>
+            <var name="advpng.available" value="true"/>
+          </else>
         </if>
         
         <if>
